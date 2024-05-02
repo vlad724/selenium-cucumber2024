@@ -1,1 +1,1 @@
-para que funcione el de manera local chrome se debe descargar desde https://googlechromelabs.github.io/chrome-for-testing/ el binario de chrome y copiar la carpeta una vez extraida a bin (la carpeta debe decir chrome-win64)
+para que funcione el de manera local chrome se debe descargar desde https://googlechromelabs.github.io/chrome-for-testing/ el binario de chrome y copiar la carpeta una vez exgit pulltraida a bin (la carpeta debe decir chrome-win64)
