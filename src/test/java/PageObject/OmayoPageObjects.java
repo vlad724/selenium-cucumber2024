@@ -17,6 +17,11 @@ public class OmayoPageObjects {
     public By btnPrompt1 = By.id("prompt");
     public By seleniumTutorialLinkLoc = By.id("selenium143");
     public By newPopUpLoc = By.linkText("Open a popup window");
+    public By questionPopUp = By.xpath("//h3[contains(text(),'New Window')]");
     public By questionLoc = By.linkText("What is Salenium?");
+    public By iframe1Loc = By.xpath("//iframe[@id='iframe1']");
+    public By divQuestionFrame1Loc =By.xpath("(//div[@class='widget-content']//table[contains(., 'What is Selenium?')])[1]");
+    public By iframe2Loc = By.xpath("//iframe[@id='iframe2']");
+    public By divQuestion2Frame1Loc = By.cssSelector("div[id*='post-body']");
 
 }

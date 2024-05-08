@@ -2,6 +2,8 @@ package Configuration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -95,4 +97,28 @@ public class WebDriverHelper {
         }
    }
 
+   public Actions createActionBuilder(WebDriver driver){
+        return new Actions(driver);
+   }
+   public Action moveToElement(WebDriver driver, By loc){
+//buildear acciones
+       return createActionBuilder(driver)
+               .moveToElement(getElement(driver, loc))
+               .build();
+   }
+
+    public Action moveToElementAndClick(WebDriver driver, By loc){
+//buildear acciones
+        return createActionBuilder(driver)
+                .moveToElement(getElement(driver, loc))
+                .click(getElement(driver, loc))
+                .build();
+    }
+
+    public Action dragAndDropToElement(WebDriver driver, By sourceLoc, By targetLoc){
+//buildear acciones
+        return createActionBuilder(driver)
+                .dragAndDrop(getElement(driver,sourceLoc),getElement(driver,targetLoc))
+                .build();
+    }
 }

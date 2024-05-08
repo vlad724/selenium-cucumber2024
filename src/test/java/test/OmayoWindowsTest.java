@@ -38,6 +38,9 @@ public class OmayoWindowsTest extends WebDriverHelper {
             seleniumTutorialElem.click();
             getWindowsHandle(driver, "SeleniumTutorial");
 
+            WebElement divQuestionFrame1Elem = getElement(driver, omayoPageObjects.divQuestionFrame1Loc);
+            System.out.println(divQuestionFrame1Elem.getText());
+
         }
 
         getWindowsHandle(driver, "principal");
@@ -46,6 +49,9 @@ public class OmayoWindowsTest extends WebDriverHelper {
 
             newPopUElem.click();
             getWindowsHandle(driver, "NewPopUp");
+
+            WebElement QuestionPopup1Elem = getElement(driver, omayoPageObjects.questionPopUp);
+            System.out.println(QuestionPopup1Elem.getText());
 
         }
 
