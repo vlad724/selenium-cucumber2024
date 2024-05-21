@@ -23,5 +23,6 @@ public class OmayoPageObjects {
     public By divQuestionFrame1Loc =By.xpath("(//div[@class='widget-content']//table[contains(., 'What is Selenium?')])[1]");
     public By iframe2Loc = By.xpath("//iframe[@id='iframe2']");
     public By divQuestion2Frame1Loc = By.cssSelector("div[id*='post-body']");
+    public By table1xLoc =By.id("table1");
 
 }

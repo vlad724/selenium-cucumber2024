@@ -5,12 +5,16 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.SkipException;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -121,4 +125,101 @@ public class WebDriverHelper {
                 .dragAndDrop(getElement(driver,sourceLoc),getElement(driver,targetLoc))
                 .build();
     }
+
+    //ejecutar metodos js y esta vez es para scroll a elemento(
+    public void scrollToElement(WebDriver driver, By locator){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //todo lo que tenga que ver con js no se puede ocupar metodo getlement() si no que
+        WebElement elem =driver.findElement(locator) != null ? driver.findElement(locator) : null;
+
+        if(elem!=null){
+            System.out.println("Scrolling to element: " + locator.toString());
+            jse.executeScript("arguments[0].scrollIntoView();", elem);
+
+        }else{
+            throw new SkipException("scrollToElement: Locator was not present" + locator);
+        }
+
+
+    }
+    public void scrollToElement(WebDriver driver, WebElement elm){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        if(elm!=null){
+            System.out.println("Scrolling to element: " + elm.toString());
+            jse.executeScript("arguments[0].scrollIntoView();", elm);
+        }else{
+            throw new SkipException("scrollToElement: Element was not present");
+        }
+
+
+    }
+
+    public void jsClick(WebDriver driver, WebElement elm){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        if(elm!=null){
+            jse.executeScript("arguments[0].click();",elm);
+        }else{
+            throw new SkipException("jsClick: Element was not present");
+        }
+
+    }
+
+    public void jsClick(WebDriver driver, By locator){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //todo lo que tenga que ver con js no se puede ocupar metodo getlement() si no que
+        WebElement elem =driver.findElement(locator) != null ? driver.findElement(locator) : null;
+
+        if(elem!=null){
+            System.out.println("Clicking to element: " + locator.toString());
+            jse.executeScript("arguments[0].click();",elem);
+        }else{
+            throw new SkipException("jsClick: Locator was not present" + locator);
+        }
+
+    }
+
+    public void setAttribute(WebDriver driver, WebElement element, String key, String value){
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        if(element!=null){
+            executor.executeScript(String.format("arguments[0].setAttribute('%s', '%s');",key,value),element);
+        }else{
+            throw new SkipException("setAttribute: Element was not present");
+        }
+    }
+
+    public void setAttribute(WebDriver driver, By locator, String key, String value){
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+
+        //todo lo que tenga que ver con js no se puede ocupar metodo getlement() si no que
+        WebElement element =driver.findElement(locator) != null ? driver.findElement(locator) : null;
+
+        if(element!=null){
+            executor.executeScript(String.format("arguments[0].setAttribute('%s', '%s');",key,value),element);
+        }else{
+            throw new SkipException("setAttribute: Locator was not present"+locator);
+        }
+    }
+
+    public void waitPageCompletelyLoaded(WebDriver driver){
+        String getActual = driver.getCurrentUrl();
+        System.out.println(String.format("Checking if page is loaded..."+ getActual));
+
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(EXPLICIT_TIMEOUT)
+                .pollingEvery(Duration.ofSeconds(3))
+                .ignoring(NoSuchElementException.class);
+
+        wait.until(webDriver ->
+                ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState")
+                        .equals("complete")
+        );
+
+
+    }
+
+    //)
 }
